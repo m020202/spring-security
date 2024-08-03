@@ -16,15 +16,15 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String username;
     private String password;
     private String email;
     private String role; // USER, ADMIN
     @CreationTimestamp
     private Timestamp createDate;
 
-    Member(String name, String password, String email) {
-        this.name = name;
+    Member(String username, String password, String email) {
+        this.username = username;
         this.password = password;
         this.email = email;
     }

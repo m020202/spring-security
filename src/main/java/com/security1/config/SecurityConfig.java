@@ -31,7 +31,10 @@ public class SecurityConfig {
                 )
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form
-                        .loginPage("/loginForm"));
+                        .loginPage("/loginForm")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/")
+                );
 
         return http.build();
     }
