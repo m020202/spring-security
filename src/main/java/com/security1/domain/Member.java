@@ -26,9 +26,14 @@ public class Member {
     @CreationTimestamp
     private Timestamp createDate;
 
-    Member(String username, String password, String email) {
+    @Builder
+    public Member(String username, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.createDate = createDate;
     }
 }

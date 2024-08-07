@@ -9,6 +9,7 @@ package com.security1.config.auth;
 import com.security1.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -18,11 +19,21 @@ import java.util.Collection;
 import java.util.Map;
 
 // Security Session => Authentication
-@AllArgsConstructor
 @Data
 public class PrincipalDetails implements UserDetails, OAuth2User {
     private Member member;
+    private Map<String, Object> attributes;
 
+    // 일반 로그인
+    public PrincipalDetails(Member member) {
+        this.member = member;
+    }
+
+    // OAuth 로그인
+    public PrincipalDetails(Member member, Map<String, Object> attributes) {
+        this.member = member;
+        this.attributes = attributes;
+    }
     // 해당 Member 의 권한을 리턴하는 곳 !!
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,11 +86,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        return attributes;
     }
 
     @Override
     public String getName() {
-        return null;
+        return (String) attributes.get("sub");
     }
 }
