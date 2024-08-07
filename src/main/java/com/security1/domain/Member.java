@@ -20,6 +20,9 @@ public class Member {
     private String password;
     private String email;
     private String role; // USER, ADMIN
+
+    private String provider;
+    private String providerId;
     @CreationTimestamp
     private Timestamp createDate;
 
